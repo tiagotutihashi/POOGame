@@ -11,12 +11,6 @@ public class LevelLoader : MonoBehaviour {
 
     public int index = 0;
 
-    void Start() {
-
-        DontDestroyOnLoad(this);
-
-    }
-
     void Update() {
 
         if (Input.GetMouseButtonDown(0)) {
