@@ -11,13 +11,13 @@ public class LevelLoader : MonoBehaviour {
 
     public int index = 0;
 
-    void Update() {
+    /*void Update() {
 
         if (Input.GetMouseButtonDown(0)) {
             LoadNextLevel();
         }
 
-    }
+    }*/
 
     public void LoadNextLevel() {
         if (SceneManager.GetActiveScene().buildIndex == 0) {
