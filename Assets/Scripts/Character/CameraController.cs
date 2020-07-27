@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class CameraController : MonoBehaviour {
 
-    public Transform player;
+    public CharacterMovement player;
 
     public Tilemap map;
     private Vector3 bottomLeftLimite;
@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour {
 
     void Start() {
 
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("Player").GetComponent<CharacterMovement>();
 
         //Pegando metado do tamanho da câmera
         halfHeight = Camera.main.orthographicSize;
@@ -26,11 +26,13 @@ public class CameraController : MonoBehaviour {
         bottomLeftLimite = map.localBounds.min + new Vector3(halfWidth, halfHeight ,0f);
         topRightLimite = map.localBounds.max + new Vector3(-halfWidth, -halfHeight, 0f);
 
+        player.SetBounds(map.localBounds.min, map.localBounds.max);
+
     }
 
     void LateUpdate() {
 
-        transform.position = new Vector3(player.position.x, player.position.y, transform.position.z);
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
 
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, bottomLeftLimite.x, topRightLimite.x), Mathf.Clamp(transform.position.y, bottomLeftLimite.y, topRightLimite.y), transform.position.z);
 
