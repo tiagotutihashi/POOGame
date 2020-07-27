@@ -11,23 +11,19 @@ public class LevelLoader : MonoBehaviour {
 
     public int index = 0;
 
-    /*void Update() {
+    private CharacterMovement player;
 
-        if (Input.GetMouseButtonDown(0)) {
-            LoadNextLevel();
-        }
+    void Start() {
+        player = GameObject.Find("Player").GetComponent<CharacterMovement>();
+    }
 
-    }*/
-
-    public void LoadNextLevel() {
-        if (SceneManager.GetActiveScene().buildIndex == 0) {
-            StartCoroutine(LoadLevel(1));
-        } else {
-            StartCoroutine(LoadLevel(0));
-        }
+    public void LoadNextLevel(int nextScene) {
+        StartCoroutine(LoadLevel(nextScene));
     }
 
     IEnumerator LoadLevel(int levelIndex) {
+
+        player.canMove = false;
 
         transition[index].gameObject.SetActive(true);
 
@@ -42,6 +38,8 @@ public class LevelLoader : MonoBehaviour {
         yield return new WaitForSeconds(transitionTime);
 
         transition[index].gameObject.SetActive(false);
+
+        player.canMove = true;
 
     }
 
