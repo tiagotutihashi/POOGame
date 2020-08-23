@@ -6,5 +6,6 @@ public class UseItem : Item {
 
     public int hp;
     public int mana;
+    public int amount;
 
 }

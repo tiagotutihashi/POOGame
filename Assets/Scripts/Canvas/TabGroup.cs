@@ -10,6 +10,8 @@ public class TabGroup : MonoBehaviour
 
     public List<GameObject> objectsToSwap;
 
+    public GameObject mainMenu;
+
     public Sprite tabIdle;
     public Sprite tabHover;
     public Sprite tabActive;
@@ -64,6 +66,17 @@ public class TabGroup : MonoBehaviour
             button.background.sprite = tabIdle;
 
         }
+
+    }
+
+    public void BackTab() {
+
+        selectedButton = null;
+        for (int i = 0; i < objectsToSwap.Count; i++) {
+                objectsToSwap[i].SetActive(false);
+        }
+
+        mainMenu.SetActive(true);
 
     }
 

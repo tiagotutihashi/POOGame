@@ -23,7 +23,7 @@ public class LevelLoader : MonoBehaviour {
 
     IEnumerator LoadLevel(int levelIndex) {
 
-        player.canMove = false;
+        GameManager.instance.canMove = false;
 
         transition[index].gameObject.SetActive(true);
 
@@ -39,7 +39,7 @@ public class LevelLoader : MonoBehaviour {
 
         transition[index].gameObject.SetActive(false);
 
-        player.canMove = true;
+        GameManager.instance.canMove = true;
 
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class EnemyMovement : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class EnemyMovement : MonoBehaviour {
     public bool follow = false;
 
     public EnemyStats[] toBattle;
+
 
     void Start()  {
 

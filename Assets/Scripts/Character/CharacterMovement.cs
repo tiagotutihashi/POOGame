@@ -12,7 +12,6 @@ public class CharacterMovement : MonoBehaviour {
     public float speed = 5f;
     public string areaTransitionName;
 
-    public bool canMove = true;
     private bool stop;
 
     private Vector3 bottomLeftLimite;
@@ -27,7 +26,7 @@ public class CharacterMovement : MonoBehaviour {
 
     void Update() {
 
-        if (canMove) {
+        if (GameManager.instance.canMove) {
             Movement();
         } else {
             rigid.velocity = Vector2.zero;

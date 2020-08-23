@@ -14,30 +14,6 @@ public class CharacterStats : MonoBehaviour {
     public int attack;
     public int defense;
 
-    public int TakeDamage(int damageToTake) {
-
-        float result = (damageToTake) / defense;
-
-        int damage = (int)result;
-
-        hp -= damage;
-
-        if (hp < 0) {
-            hp = 0;
-        }
-
-        return damage;
-
-    }
-
-    public int InflictDamge(int attackPower) {
-
-        float result = attack * attackPower;
-
-        int damage = (int)result;
-
-        return damage;
-
-    }
+    public List<AttackStats> attackList = new List<AttackStats>();
 
 }
