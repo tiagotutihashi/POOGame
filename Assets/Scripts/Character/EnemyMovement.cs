@@ -24,11 +24,11 @@ public class EnemyMovement : MonoBehaviour {
     
     void LateUpdate() {
 
-        if (follow) {
+        if (follow && GameManager.instance.enemyMove) {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
             if (Vector2.Distance(transform.position, player.transform.position) < 1) {
-                GameManager.instance.EnemyTrigger(toBattle);
-                Destroy(this);
+                GameManager.instance.enemyMove = false;
+                GameManager.instance.EnemyTrigger(this);
             }
         }
  

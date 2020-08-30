@@ -25,20 +25,20 @@ public class ItemTarget : MonoBehaviour {
 
         //Using item
         //HP
-        battleManager.characterStatus[battleMenu.playerId].hp += selected.hp;
-        if (battleManager.characterStatus[battleMenu.playerId].hp > battleManager.characterStatus[battleMenu.playerId].maxHp) {
-            battleManager.characterStatus[battleMenu.playerId].hp = battleManager.characterStatus[battleMenu.playerId].maxHp;
+        battleManager.characterStatus[target].hp += selected.hp;
+        if (battleManager.characterStatus[target].hp > battleManager.characterStatus[target].maxHp) {
+            battleManager.characterStatus[target].hp = battleManager.characterStatus[target].maxHp;
         }
-        battleManager.charactersUi[battleMenu.playerId].hpBar.SetValue(battleManager.characterStatus[battleMenu.playerId].hp);
-        battleManager.charactersUi[battleMenu.playerId].hpText.text = battleManager.characterStatus[battleMenu.playerId].hp.ToString() + "/" + battleManager.characterStatus[battleMenu.playerId].maxHp;
+        battleManager.charactersUi[target].hpBar.SetValue(battleManager.characterStatus[target].hp);
+        battleManager.charactersUi[target].hpText.text = battleManager.characterStatus[target].hp.ToString() + "/" + battleManager.characterStatus[target].maxHp;
 
         //Mana
-        battleManager.characterStatus[battleMenu.playerId].mana += selected.mana;
-        if (battleManager.characterStatus[battleMenu.playerId].mana > battleManager.characterStatus[battleMenu.playerId].maxMana) {
-            battleManager.characterStatus[battleMenu.playerId].mana = battleManager.characterStatus[battleMenu.playerId].maxMana;
+        battleManager.characterStatus[target].mana += selected.mana;
+        if (battleManager.characterStatus[target].mana > battleManager.characterStatus[target].maxMana) {
+            battleManager.characterStatus[target].mana = battleManager.characterStatus[target].maxMana;
         }
-        battleManager.charactersUi[battleMenu.playerId].mnBar.SetValue(battleManager.characterStatus[battleMenu.playerId].mana);
-        battleManager.charactersUi[battleMenu.playerId].mnText.text = battleManager.characterStatus[battleMenu.playerId].mana.ToString() + "/" + battleManager.characterStatus[battleMenu.playerId].maxMana;
+        battleManager.charactersUi[target].mnBar.SetValue(battleManager.characterStatus[target].mana);
+        battleManager.charactersUi[target].mnText.text = battleManager.characterStatus[target].mana.ToString() + "/" + battleManager.characterStatus[target].maxMana;
 
         //Decrease amount
         GameManager.instance.DecreaseUseItems(selected.itemName);
@@ -80,6 +80,7 @@ public class ItemTarget : MonoBehaviour {
         for (int i = 0; i <= players.Count - 1; i++) {
 
             targetButtons[i].gameObject.SetActive(true);
+            targetButtons[i].interactable = true;
             targetButtons[i].GetComponentInChildren<Text>().text = players[i].charName;
 
             if ((selected.mana > 0 && (players[i].mana == players[i].maxMana)) || (selected.hp > 0 && (players[i].hp == players[i].maxHp))) {

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
     public List<UseItem> allUseItems;
 
     public bool canMove = true;
+    public bool enemyMove = true;
 
     void Start() {
 
@@ -31,10 +32,13 @@ public class GameManager : MonoBehaviour {
         
     }
 
-    public void EnemyTrigger(EnemyStats[] toBattle) {
+    public void EnemyTrigger(EnemyMovement toBattle) {
 
+        EnemyMovement clone = toBattle;
+        Destroy(toBattle.gameObject);
         battleManager.gameObject.SetActive(true);
-        battleManager.BattleStart(toBattle);
+        battleManager.BattleStart(clone.toBattle);
+        
 
     }
 

@@ -23,6 +23,8 @@ public class LevelLoader : MonoBehaviour {
 
     IEnumerator LoadLevel(int levelIndex) {
 
+        GameManager.instance.enemyMove = false;
+
         GameManager.instance.canMove = false;
 
         transition[index].gameObject.SetActive(true);
@@ -40,6 +42,8 @@ public class LevelLoader : MonoBehaviour {
         transition[index].gameObject.SetActive(false);
 
         GameManager.instance.canMove = true;
+
+        GameManager.instance.enemyMove = true;
 
     }
 

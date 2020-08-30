@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour {
         halfWidth = halfHeight * Camera.main.aspect;
 
         //Pegas os limite do tilemap da cena limitando com o tamanho da câmera
-        bottomLeftLimite = map.localBounds.min + new Vector3(halfWidth, halfHeight ,0f);
+        bottomLeftLimite = map.localBounds.min + new Vector3(halfWidth, halfHeight-1.8f,0f);
         topRightLimite = map.localBounds.max + new Vector3(-halfWidth, -halfHeight, 0f);
 
         player.SetBounds(map.localBounds.min, map.localBounds.max);

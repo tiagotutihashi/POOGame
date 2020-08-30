@@ -99,14 +99,14 @@ MonoBehaviour:
   level: 1
   hp: 15
   maxHp: 15
-  mana: 10
+  mana: 9
   maxMana: 10
-  attack: 8
+  attack: 20
   defense: 8
   attackList:
   - {fileID: 3246332434152961584, guid: 6aa1e4d74d5c01643954f45d5d12185b, type: 3}
-  exp: 0
+  exp: 2
   maxExp: 0
-  expBase: 0
+  expBase: 200
   attItem: {fileID: 6276609538541592443, guid: 7539378f719f3f74e92f09cb34347d0a, type: 3}
   defItem: {fileID: 6983620225449745962, guid: fae42a9eb64748742be9518822c39db3, type: 3}

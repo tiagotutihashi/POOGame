@@ -35,8 +35,15 @@ public class EnemyTargetMenu : MonoBehaviour {
 
         // Damage to enemy
         battleManager.enemyHp[target] -= damage;
-        battleManager.charactersUi[target + 2].hpBar.SetValue(battleManager.enemyHp[target]);
-        battleManager.charactersUi[target + 2].hpText.text = battleManager.enemyHp[target].ToString() + "/" + battleManager.enemyMaxHp[target].ToString();
+        if (battleManager.inspected) {
+            battleManager.charactersUi[target + 2].hpBar.SetValue(battleManager.enemyHp[target]);
+            battleManager.charactersUi[target + 2].hpText.text = battleManager.enemyHp[target].ToString() + "/" + battleManager.enemyMaxHp[target].ToString();
+        }
+
+        if(battleManager.enemyHp[target] <= 0) {
+            battleManager.enemyHp[target] = 0;
+            enemyPosition[target].gameObject.SetActive(false);
+        }
 
         //Set player action for the turn
         battleMenu.action = true;
@@ -54,7 +61,7 @@ public class EnemyTargetMenu : MonoBehaviour {
 
     public void MakeAttack(int enemy) {
 
-       StartCoroutine(AttackAnimation(enemy));
+        StartCoroutine(AttackAnimation(enemy));
 
     }
 
@@ -76,6 +83,11 @@ public class EnemyTargetMenu : MonoBehaviour {
 
             targetButtons[i].gameObject.SetActive(true);
             targetButtons[i].GetComponentInChildren<Text>().text = enemies[i];
+            targetButtons[i].interactable = true;
+
+            if (battleManager.enemyHp[i] <= 0) {
+                targetButtons[i].interactable = false;
+            }
 
         }
 
