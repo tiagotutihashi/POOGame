@@ -11,14 +11,22 @@ public class LevelLoader : MonoBehaviour {
 
     public int index = 0;
 
-    private CharacterMovement player;
-
-    void Start() {
-        player = GameObject.Find("Player").GetComponent<CharacterMovement>();
-    }
+    public CharacterMovement player;
 
     public void LoadNextLevel(int nextScene) {
         StartCoroutine(LoadLevel(nextScene));
+    }
+
+    public void LoadFromLoad(int nextScene) {
+        StartCoroutine(LoadLevelLoad(nextScene));
+    }
+
+    public void LoadFromMainMenu() {
+        StartCoroutine(LoadLevelMainMenu());
+    }
+
+    public void LoadToMainMenu() {
+        StartCoroutine(LoadLevelToMainMenu());
     }
 
     IEnumerator LoadLevel(int levelIndex) {
@@ -36,6 +44,94 @@ public class LevelLoader : MonoBehaviour {
         SceneManager.LoadScene(levelIndex);
 
         transition[index].SetTrigger("End");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        transition[index].gameObject.SetActive(false);
+
+        GameManager.instance.canMove = true;
+
+        GameManager.instance.enemyMove = true;
+
+    }
+
+    IEnumerator LoadLevelLoad(int levelIndex) {
+
+        GameManager.instance.enemyMove = false;
+
+        GameManager.instance.canMove = false;
+
+        transition[index].gameObject.SetActive(true);
+
+        transition[index].SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
+
+        transition[index].SetTrigger("End");
+
+        player.gameObject.SetActive(true);
+
+        player.gameObject.transform.position = new Vector3(0, 0, 0);
+
+        yield return new WaitForSeconds(transitionTime);
+
+        transition[index].gameObject.SetActive(false);
+
+        GameManager.instance.canMove = true;
+
+        GameManager.instance.enemyMove = true;
+
+    }
+
+    IEnumerator LoadLevelMainMenu() {
+
+        GameManager.instance.enemyMove = false;
+
+        GameManager.instance.canMove = false;
+
+        transition[index].gameObject.SetActive(true);
+
+        transition[index].SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(PlayerPrefs.GetInt("Current_Scene"));
+
+        transition[index].SetTrigger("End");
+
+        player.gameObject.SetActive(true);
+
+        player.gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("Player_Position_x"), PlayerPrefs.GetFloat("Player_Position_y"), PlayerPrefs.GetFloat("Player_Position_z"));
+
+        yield return new WaitForSeconds(transitionTime);
+
+        transition[index].gameObject.SetActive(false);
+
+        GameManager.instance.canMove = true;
+
+        GameManager.instance.enemyMove = true;
+
+    }
+
+    IEnumerator LoadLevelToMainMenu() {
+
+        GameManager.instance.enemyMove = false;
+
+        GameManager.instance.canMove = false;
+
+        transition[index].gameObject.SetActive(true);
+
+        transition[index].SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(0);
+
+        transition[index].SetTrigger("End");
+
+        player.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(transitionTime);
 

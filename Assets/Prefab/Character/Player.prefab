@@ -173,14 +173,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Dren
   level: 1
-  hp: 10
+  hp: 5
   maxHp: 10
-  mana: 0
-  maxMana: 0
+  mana: 3
+  maxMana: 5
   attack: 10
   defense: 5
   attackList:
   - {fileID: 3246332434152961584, guid: 6aa1e4d74d5c01643954f45d5d12185b, type: 3}
+  charImage: {fileID: 8019677850098222680, guid: f18e6e009172ebe4fb390d30c2ac18b1,
+    type: 3}
   exp: 0
   maxExp: 0
   expBase: 200

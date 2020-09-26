@@ -27,17 +27,21 @@ public class CharacterMovement : MonoBehaviour {
     void Update() {
 
         if (GameManager.instance.canMove) {
-            Movement();
-        } else {
+            Movement(false);
+        } else if (GameManager.instance.battleManager.battling) {
             rigid.velocity = Vector2.zero;
+        } else {
+            Movement(true);
         }
 
     }
 
-    private void Movement() {
+    private void Movement(bool isLoading) {
 
-        x = Input.GetAxisRaw("Horizontal");
-        y = Input.GetAxisRaw("Vertical");
+        if (!isLoading) {
+            x = Input.GetAxisRaw("Horizontal");
+            y = Input.GetAxisRaw("Vertical");
+        }
 
         if (x != 0 || y != 0) {
             stop = false;
@@ -55,7 +59,9 @@ public class CharacterMovement : MonoBehaviour {
             anim.SetFloat("lastMoveY", y);
         }
 
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, bottomLeftLimite.x, topRightLimite.x), Mathf.Clamp(transform.position.y, bottomLeftLimite.y, topRightLimite.y), transform.position.z);
+        if (!isLoading) {
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, bottomLeftLimite.x, topRightLimite.x), Mathf.Clamp(transform.position.y, bottomLeftLimite.y, topRightLimite.y), transform.position.z);
+        }
 
     }
 

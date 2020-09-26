@@ -12,6 +12,7 @@ public class BattleManager : MonoBehaviour {
     public bool battling;
     public bool inspected;
 
+
     public BattleMenu[] battleMenus;
 
     public List<string> enemyName = new List<string>();
@@ -54,47 +55,73 @@ public class BattleManager : MonoBehaviour {
 
         if (battling) {
 
-            if (battleMenus[0].action && battleMenus[1].action) {
+            if (battleMenus[0].action && !battleMenus[1].action) {
 
-                for (int index = 0; index <= enemyPosition.Length - 1; index++) {
-
-                    if (enemyPosition[index].gameObject.activeInHierarchy) {
-                        int playerTarget = Random.Range(0, 100);
-                        if (playerTarget % 2 == 0) {
-                            if (characterStatus[0].hp > 0)
-                                CalcDamage(0, index);
-                            else
-                                CalcDamage(1, index);
-                        } else {
-                            if (characterStatus[1].hp > 0)
-                                CalcDamage(1, index);
-                            else
-                                CalcDamage(0, index);
-                        }
-
-                    }
-
+                ProcessBattle();
+                if (characterStatus[1].hp > 0) {
+                    battleMenus[1].action = false;
+                    battleMenus[1].gameObject.SetActive(true);
                 }
 
-                for (int index = 0; index <= characterStatus.Count - 1; index++) {
-                    if (characterStatus[index].hp > 0) {
-                        battleMenus[index].action = false;
-                        battleMenus[index].gameObject.SetActive(true);
-                    }
-                }
+            } else if (!battleMenus[0].action && battleMenus[1].action) {
 
-                if (enemyHp[0] <= 0 && enemyHp[1] <= 0) {
-                    BattleEnd(true, false);
-                }
+                ProcessBattle();
 
-                if (characterStatus[0].hp <= 0 && characterStatus[1].hp <= 0) {
-                    BattleEnd(false, true);
+            } else if(battleMenus[0].action && battleMenus[1].action) {
+                EnemyTurns();
+                ProcessBattle();
+                if (characterStatus[0].hp > 0) {
+                    battleMenus[0].action = false;
+                    battleMenus[0].gameObject.SetActive(true);
+                } else if(characterStatus[1].hp > 0) {
+                    battleMenus[1].action = false;
+                    battleMenus[1].gameObject.SetActive(true);
+                }
+            }
+
+        }
+
+    }
+
+    private void EnemyTurns() {
+        for (int index = 0; index <= enemyPosition.Length - 1; index++) {
+
+            if (enemyPosition[index].gameObject.activeInHierarchy) {
+                int playerTarget = Random.Range(0, 100);
+                if (playerTarget % 2 == 0) {
+                    if (characterStatus[0].hp > 0)
+                        CalcDamage(0, index);
+                    else
+                        CalcDamage(1, index);
+                } else {
+                    if (characterStatus[1].hp > 0)
+                        CalcDamage(1, index);
+                    else
+                        CalcDamage(0, index);
                 }
 
             }
 
         }
+    }
 
+    private void CleckAlive() {
+        for (int index = 0; index <= characterStatus.Count - 1; index++) {
+            if (characterStatus[index].hp > 0) {
+                battleMenus[index].action = false;
+                battleMenus[index].gameObject.SetActive(true);
+            }
+        }
+    }
+
+    private void ProcessBattle() {
+        if (enemyHp[0] <= 0 && enemyHp[1] <= 0 && battling) {
+            BattleEnd(true, false);
+        }
+
+        if (characterStatus[0].hp <= 0 && characterStatus[1].hp <= 0 && battling) {
+            BattleEnd(false, true);
+        }
     }
 
     private void CalcDamage(int target, int enemy) {
@@ -205,6 +232,7 @@ public class BattleManager : MonoBehaviour {
             losePanel.SetActive(true);
             winPanel.SetActive(false);
         }
+        battling = false;
 
     }
 
@@ -268,6 +296,15 @@ public class BattleManager : MonoBehaviour {
         characterStatus.Add(GameManager.instance.player[0]);
         characterStatus.Add(GameManager.instance.player[1]);
 
+        enemyName.Clear();
+        enemyLevel.Clear();
+        enemyHp.Clear();
+        enemyMaxHp.Clear();
+        enemyMana.Clear();
+        enemyMaxMana.Clear();
+        enemyAttack.Clear();
+        enemyDefense.Clear();
+
         foreach (EnemyStats enemy in enemies) {
             enemyName.Add(enemy.charName);
             enemyLevel.Add(enemy.level);
@@ -301,6 +338,9 @@ public class BattleManager : MonoBehaviour {
 
         battling = true;
         inspected = false;
+
+        CleckAlive();
+        battleMenus[1].gameObject.SetActive(false);
 
     }
 

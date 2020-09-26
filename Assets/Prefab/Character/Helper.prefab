@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2259690318143064435}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.986, y: 0.024, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,15 +97,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Poi
   level: 1
-  hp: 15
-  maxHp: 15
-  mana: 9
-  maxMana: 10
-  attack: 20
-  defense: 8
+  hp: 10
+  maxHp: 10
+  mana: 5
+  maxMana: 5
+  attack: 10
+  defense: 5
   attackList:
   - {fileID: 3246332434152961584, guid: 6aa1e4d74d5c01643954f45d5d12185b, type: 3}
-  exp: 2
+  charImage: {fileID: 1811123792282656331, guid: 3ef25c6423da6b041b6928ea3da7877b,
+    type: 3}
+  exp: 0
   maxExp: 0
   expBase: 200
   attItem: {fileID: 6276609538541592443, guid: 7539378f719f3f74e92f09cb34347d0a, type: 3}

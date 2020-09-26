@@ -16,4 +16,6 @@ public class CharacterStats : MonoBehaviour {
 
     public List<AttackStats> attackList = new List<AttackStats>();
 
+    public Sprite charImage;
+
 }

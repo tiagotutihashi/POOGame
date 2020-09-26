@@ -550,3 +550,4 @@ MonoBehaviour:
   - {fileID: 2020152075}
   transitionTime: 1
   index: 1
+  player: {fileID: 0}

@@ -6,6 +6,14 @@ public class AreaExit : MonoBehaviour {
 
     public int areaToLoad;
 
+    private float directionX = 0.3f;
+    private float directionY = 0.3f;
+
+    public bool isX;
+    public bool isY;
+    public bool negativeX;
+    public bool negativeY;
+
     public string areaTransitionName;
 
     private LevelLoader loader;
@@ -21,7 +29,24 @@ public class AreaExit : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Player") {
+        if (other.tag == "Player" && GameManager.instance.canMove) {
+            if (isX) {
+                if (negativeX) {
+                    player.x = directionX * -1;
+                } else {
+                    player.x = directionX;
+                }
+                player.y = 0;
+            }
+
+            if (isY) {
+                if (negativeY)
+                    player.y = directionY * -1;
+                else
+                    player.y = directionY;
+                player.x = 0;
+            }
+
             loader.LoadNextLevel(areaToLoad);
 
             player.areaTransitionName = areaTransitionName;
