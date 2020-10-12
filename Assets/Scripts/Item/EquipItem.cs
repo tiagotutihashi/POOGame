@@ -7,5 +7,7 @@ public class EquipItem : Item {
     public int hp;
     public int attack;
     public int defense;
+    public int equiped;
+    public int type;
 
 }

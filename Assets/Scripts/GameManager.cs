@@ -17,10 +17,17 @@ public class GameManager : MonoBehaviour {
     public List<int> playerUseItemsAmount;
     public List<UseItem> allUseItems;
 
+    public List<EquipItem> playerEquipItems = new List<EquipItem>();
+    public int playerEquipItemsHave;
+    public List<EquipItem> allEquipItems;
+
     public bool canMove = true;
     public bool enemyMove = true;
 
     public TabButton characterButton;
+    public GameObject selectContainer;
+    public GameObject charDetailsContainer;
+    public CharacterListMenu characterListMenu;
     public Text savedGame;
 
     void Start() {
@@ -31,6 +38,7 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(this);
 
             GetUseItems();
+            GetEquipItems();
         } else {
 
             Destroy(gameObject);
@@ -62,12 +70,14 @@ public class GameManager : MonoBehaviour {
     public void DeactivateMenu() {
         savedGame.text = "";
         menu.SetActive(false);
-
+        selectContainer.SetActive(false);
+        charDetailsContainer.SetActive(false);
     }
 
     public void ActivateMenu() {
         menu.SetActive(true);
         menu.GetComponentInChildren<TabGroup>().OnTabSelect(characterButton);
+        characterListMenu.LoadItems();
     }
 
     public void EnemyTrigger(EnemyMovement toBattle) {
@@ -93,6 +103,25 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    public void GetEquipItems() {
+
+        playerEquipItems.Clear();
+
+        for (int i = 0; i < playerEquipItemsHave; i++) {
+
+            EquipItem newItem = allEquipItems[i];
+            newItem.equiped = -1;
+            for (int f = 0; f < player.Length; f++) {
+                if (newItem.itemName.Equals(player[f].attItem.itemName) || newItem.itemName.Equals(player[f].defItem.itemName)) {
+                    newItem.equiped = f;
+                } 
+            }
+            playerEquipItems.Add(newItem);
+
+        }
+
+    }
+
     public void DecreaseUseItems(string itemName) {
 
         playerUseItems.Clear();
@@ -106,8 +135,8 @@ public class GameManager : MonoBehaviour {
             } else {
                 newItem.amount = playerUseItemsAmount[i];
             }
-            playerUseItems.Add(newItem);
-
+            if(playerUseItemsAmount[i] > 0)
+                playerUseItems.Add(newItem);
         }
 
     }

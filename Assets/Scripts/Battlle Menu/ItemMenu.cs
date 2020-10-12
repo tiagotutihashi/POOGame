@@ -35,7 +35,6 @@ public class ItemMenu : MonoBehaviour {
             newB.GetComponent<ItemSelect>().itemAmount.text = "Q: " + item.amount.ToString();
             newB.GetComponent<ItemSelect>().selected = item;
             newB.GetComponent<Button>().onClick.AddListener(() => SetItem(item));
-
         }
 
         backButton.transform.SetAsLastSibling();

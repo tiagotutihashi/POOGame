@@ -102,3 +102,4 @@ MonoBehaviour:
   hp: 0
   attack: 10
   defense: 0
+  equiped: 0

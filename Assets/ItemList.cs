@@ -14,12 +14,7 @@ public class ItemList : MonoBehaviour {
     public void SetItem(UseItem item) {
 
         itemToUse = item;
-        painelSelect.gameObject.SetActive(true);
-        painelSelect.LoadPlayer();
-
-    }
-
-    void Start() {
+        painelSelect.LoadPlayer("item");
 
     }
 
