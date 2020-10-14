@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour {
@@ -12,8 +13,6 @@ public class CharacterMovement : MonoBehaviour {
     public float speed = 5f;
     public string areaTransitionName;
 
-    private bool stop;
-
     private Vector3 bottomLeftLimite;
     private Vector3 topRightLimite;
 
@@ -21,6 +20,8 @@ public class CharacterMovement : MonoBehaviour {
 
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        GameManager.instance.terminarManager.AddObj("CharacterMovement");
 
     }
 
@@ -44,9 +45,8 @@ public class CharacterMovement : MonoBehaviour {
         }
 
         if (x != 0 || y != 0) {
-            stop = false;
-        } else {
-            stop = true;
+            if(!GameManager.instance.terminarManager.methodsLines.LastOrDefault().Equals("CharacterMovement.Movement()"))
+                GameManager.instance.terminarManager.AddMethod("CharacterMovement.Movement()");
         }
 
         rigid.velocity = new Vector2(x, y) * speed;

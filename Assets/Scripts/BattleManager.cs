@@ -12,7 +12,6 @@ public class BattleManager : MonoBehaviour {
     public bool battling;
     public bool inspected;
 
-
     public BattleMenu[] battleMenus;
 
     public List<string> enemyName = new List<string>();
@@ -48,6 +47,8 @@ public class BattleManager : MonoBehaviour {
     public Bar[] playerBar;
 
     void Start() {
+
+        GameManager.instance.terminarManager.AddObj("BattleManager");
 
     }
 
@@ -103,6 +104,9 @@ public class BattleManager : MonoBehaviour {
             }
 
         }
+
+        GameManager.instance.terminarManager.AddMethod("BattleManager.EnemyTurns()");
+
     }
 
     private void CleckAlive() {
@@ -112,6 +116,9 @@ public class BattleManager : MonoBehaviour {
                 battleMenus[index].gameObject.SetActive(true);
             }
         }
+
+        GameManager.instance.terminarManager.AddMethod("BattleManager.CheckAlive()");
+
     }
 
     private void ProcessBattle() {
@@ -122,6 +129,8 @@ public class BattleManager : MonoBehaviour {
         if (characterStatus[0].hp <= 0 && characterStatus[1].hp <= 0 && battling) {
             BattleEnd(false, true);
         }
+
+        GameManager.instance.terminarManager.AddMethod("BattleManager.ProcessBattle()");
     }
 
     private void CalcDamage(int target, int enemy) {
@@ -135,6 +144,8 @@ public class BattleManager : MonoBehaviour {
         }
         charactersUi[target].hpText.text = characterStatus[target].hp.ToString() + "/" + characterStatus[target].maxHp;
         charactersUi[target].hpBar.SetValue(characterStatus[target].hp);
+
+        GameManager.instance.terminarManager.AddMethod("BattleManager.CalcDamage()");
     }
 
     private void SetStatsUi(BattleStats painel, CharacterStats charStats, int target) {
@@ -149,7 +160,7 @@ public class BattleManager : MonoBehaviour {
         if (charStats.hp <= 0) {
             battleMenus[target].action = true;
             battleMenus[target].gameObject.SetActive(false);
-        }
+        }       
     }
 
     public void Inspect(int playerId) {
@@ -172,6 +183,9 @@ public class BattleManager : MonoBehaviour {
         for (int index = 0; index < buttonInspect.Count; index++) {
             buttonInspect[index].interactable = false;
         }
+
+        GameManager.instance.terminarManager.AddMethod("BattleManager.Inspect()");
+
     }
 
     public void BattleEnd(bool win, bool lose) {
@@ -234,6 +248,8 @@ public class BattleManager : MonoBehaviour {
         }
         battling = false;
 
+        GameManager.instance.terminarManager.AddMethod("BattleManager.BattleEnd()");
+
     }
 
     public void ExitBattleField() {
@@ -242,6 +258,8 @@ public class BattleManager : MonoBehaviour {
         gameObject.SetActive(false);
         GameManager.instance.canMove = true;
         GameManager.instance.enemyMove = true;
+
+        GameManager.instance.terminarManager.AddMethod("BattleManager.ExitBattleField()");
 
     }
 
@@ -253,6 +271,8 @@ public class BattleManager : MonoBehaviour {
             ExitBattleField();
         }
         battleMenus[playerId].gameObject.SetActive(false);
+
+        GameManager.instance.terminarManager.AddMethod("BattleManager.EscapeBattle()");
 
     }
 
@@ -341,6 +361,8 @@ public class BattleManager : MonoBehaviour {
 
         CleckAlive();
         battleMenus[1].gameObject.SetActive(false);
+
+        GameManager.instance.terminarManager.AddMethod("BattleManager.BattleStart()");
 
     }
 

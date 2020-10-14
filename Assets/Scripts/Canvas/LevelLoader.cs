@@ -15,18 +15,22 @@ public class LevelLoader : MonoBehaviour {
 
     public void LoadNextLevel(int nextScene) {
         StartCoroutine(LoadLevel(nextScene));
+        GameManager.instance.terminarManager.AddMethod("LevelLoader.LoadNextLevel()");
     }
 
     public void LoadFromLoad(int nextScene) {
         StartCoroutine(LoadLevelLoad(nextScene));
+        GameManager.instance.terminarManager.AddMethod("LevelLoader.LoadFromLoad()");
     }
 
     public void LoadFromMainMenu() {
         StartCoroutine(LoadLevelMainMenu());
+        GameManager.instance.terminarManager.AddMethod("LevelLoader.LoadFromMainMenu()");
     }
 
     public void LoadToMainMenu() {
         StartCoroutine(LoadLevelToMainMenu());
+        GameManager.instance.terminarManager.AddMethod("LevelLoader.LoadToMainMenu()");
     }
 
     IEnumerator LoadLevel(int levelIndex) {

@@ -19,6 +19,8 @@ public class EnemyMovement : MonoBehaviour {
         loader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
         player = GameObject.Find("Player").GetComponent<CharacterMovement>();
 
+        GameManager.instance.terminarManager.AddObj("EnemyMovement");
+
     }
 
     

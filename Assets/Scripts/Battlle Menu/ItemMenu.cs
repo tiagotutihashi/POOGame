@@ -20,6 +20,7 @@ public class ItemMenu : MonoBehaviour {
     void SetItem(UseItem selected) {
 
         selectedItem = selected;
+        GameManager.instance.terminarManager.AddMethod("ItemMenu.SetItem()");
 
     }
 

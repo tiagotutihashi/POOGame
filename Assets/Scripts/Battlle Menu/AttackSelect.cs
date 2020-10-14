@@ -20,7 +20,9 @@ public class AttackSelect : MonoBehaviour {
 
         enemyTarget.gameObject.SetActive(true);
         enemyTarget.selected = selected;
-        GetComponentInParent<Transform>().GetComponentInParent<AttackMenu>().attackMenu.SetActive(false);    
+        GetComponentInParent<Transform>().GetComponentInParent<AttackMenu>().attackMenu.SetActive(false);
+
+        GameManager.instance.terminarManager.AddMethod("AttackSelect.SetAttack()");
 
     }
 

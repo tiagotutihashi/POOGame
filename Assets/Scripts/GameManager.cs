@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour {
     public CharacterListMenu characterListMenu;
     public Text savedGame;
 
+    public TerminarManager terminarManager;
+
     void Start() {
 
         if(GameManager.instance == null) {
@@ -72,12 +74,16 @@ public class GameManager : MonoBehaviour {
         menu.SetActive(false);
         selectContainer.SetActive(false);
         charDetailsContainer.SetActive(false);
+
+        terminarManager.AddMethod("GameManager.DeactivateMenu()");
     }
 
     public void ActivateMenu() {
         menu.SetActive(true);
         menu.GetComponentInChildren<TabGroup>().OnTabSelect(characterButton);
         characterListMenu.LoadItems();
+
+        terminarManager.AddMethod("GameManager.ActivateMenu()");
     }
 
     public void EnemyTrigger(EnemyMovement toBattle) {
@@ -139,6 +145,8 @@ public class GameManager : MonoBehaviour {
                 playerUseItems.Add(newItem);
         }
 
+        terminarManager.AddMethod("GameManager.DecreaseUseItems(" + itemName + ")");
+
     }
 
     public void SaveGame() {
@@ -172,6 +180,8 @@ public class GameManager : MonoBehaviour {
 
         }
 
+        terminarManager.AddMethod("GameManager.SaveGame()");
+
     }
 
     public void LoadGame() {
@@ -200,12 +210,16 @@ public class GameManager : MonoBehaviour {
 
         } */
 
+        terminarManager.AddMethod("GameManager.LoadGame()");
+
     }
 
     public void GoToMainMenu() {
 
         GetComponentInChildren<LevelLoader>().LoadToMainMenu();
         menu.SetActive(false);
+
+        terminarManager.AddMethod("GameManager.GoToMainMenu()");
 
     }
 

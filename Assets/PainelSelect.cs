@@ -105,6 +105,9 @@ public class PainelSelect : MonoBehaviour {
                 }
             }
         }
+
+        GameManager.instance.terminarManager.AddMethod("PainelSelect.LoadPlayer()");
+
     }
 
     public void CloseMenu() {

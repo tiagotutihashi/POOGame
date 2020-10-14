@@ -26,6 +26,8 @@ public class AreaExit : MonoBehaviour {
         player = GameObject.Find("Player").GetComponent<CharacterMovement>();
 
         entrance.transitionName = areaTransitionName;
+
+        GameManager.instance.terminarManager.AddObj("AreaExit");    
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

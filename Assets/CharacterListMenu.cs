@@ -37,5 +37,7 @@ public class CharacterListMenu : MonoBehaviour {
             playerContainer[i].GetComponent<Button>().onClick.AddListener(() => SetItem(player));
         }
 
+        GameManager.instance.terminarManager.AddMethod("CharacterListMenu.LoadItems()");
+
     }
 }

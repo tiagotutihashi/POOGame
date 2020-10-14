@@ -28,6 +28,8 @@ public class CameraController : MonoBehaviour {
 
         player.SetBounds(map.localBounds.min, map.localBounds.max);
 
+        GameManager.instance.terminarManager.AddObj("CameraController");
+
     }
 
     void LateUpdate() {

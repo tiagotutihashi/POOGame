@@ -36,6 +36,8 @@ public class EquipList : MonoBehaviour {
             newB.GetComponent<Button>().onClick.AddListener(() => SetItem(item));
         }
 
+        GameManager.instance.terminarManager.AddMethod("EquipList.LoadItems()");
+
     }
 
 }

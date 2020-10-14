@@ -47,6 +47,8 @@ public class CharacterDetailsMenu : MonoBehaviour {
         charDefItem.equipDef.text = "Def:\n" + player.defItem.defense;
         charDefItem.equipHp.text = "Hp:\n" + player.defItem.hp;
 
+        GameManager.instance.terminarManager.AddMethod("CharacterDetailsMenu.LoadStatus()");
+
     }
 
     public void CloseMenu() {

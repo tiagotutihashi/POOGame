@@ -63,6 +63,8 @@ public class EnemyTargetMenu : MonoBehaviour {
 
         StartCoroutine(AttackAnimation(enemy));
 
+        GameManager.instance.terminarManager.AddMethod("EnemyTargetMenu.MakeAttack()");
+
     }
 
     public void BackButton() {

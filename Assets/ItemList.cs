@@ -33,6 +33,9 @@ public class ItemList : MonoBehaviour {
             newB.GetComponent<ItemListItem>().itemAmount.text = "Q: " + item.amount.ToString();
             newB.GetComponent<Button>().onClick.AddListener(() => SetItem(item));
         }
+
+        GameManager.instance.terminarManager.AddMethod("ItemList.LoadItems()");
+
     }
 
 }

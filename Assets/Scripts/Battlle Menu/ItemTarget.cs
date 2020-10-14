@@ -60,6 +60,7 @@ public class ItemTarget : MonoBehaviour {
     public void UseItem(int enemy) {
 
         StartCoroutine(AttackAnimation(enemy));
+        GameManager.instance.terminarManager.AddMethod("ItemTarget.UseItem()");
 
     }
 
