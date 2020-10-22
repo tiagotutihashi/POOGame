@@ -275,6 +275,7 @@ MonoBehaviour:
   defaultItem: {fileID: 8534831322568684294, guid: 1d64d4b44d9af5d4f996729ca8bceddc,
     type: 3}
   itemList: {fileID: 885704784}
+  equipList: {fileID: 0}
 --- !u!1 &673415930
 GameObject:
   m_ObjectHideFlags: 0

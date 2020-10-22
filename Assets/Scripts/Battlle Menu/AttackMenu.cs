@@ -23,17 +23,29 @@ public class AttackMenu : MonoBehaviour {
 
     public int playerId;
 
+    public GameObject initialMenu;
+
+    public GameObject battleMenu;
+
     void SetAttack(AttackStats selected) {
 
         selectedAttack = selected;
 
     }
 
-    void Start() {
+    public void LoadAttacks() {
+
+        initialMenu.SetActive(false);
+
+        gameObject.SetActive(true);
 
         buttonGroup = GetComponent<TabGroup>();
 
         attackList = player.attackList;
+
+        foreach (Transform child in attackMenu.transform) {
+            Destroy(child.gameObject);
+        } 
 
         foreach (AttackStats attack in attackList) {
             GameObject newB = Instantiate(defaultButton, attackMenu.transform);
@@ -49,7 +61,11 @@ public class AttackMenu : MonoBehaviour {
             }
         }
 
-        backButton.transform.SetAsLastSibling();
+        Button newBackButton = Instantiate(backButton, attackMenu.transform);
+        newBackButton.onClick.AddListener(() => gameObject.SetActive(false));
+        newBackButton.onClick.AddListener(() => battleMenu.GetComponent<TabGroup>().BackTab());
+
+        GameManager.instance.terminarManager.AddMethod("AttackMenu.LoadAttacks()");
 
     }
 

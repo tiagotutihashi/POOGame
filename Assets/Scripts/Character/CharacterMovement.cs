@@ -21,7 +21,7 @@ public class CharacterMovement : MonoBehaviour {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        GameManager.instance.terminarManager.AddObj("CharacterMovement");
+        GameManager.instance.terminarManager.AddObj(gameObject.name,"CharacterMovement");
 
     }
 
@@ -31,6 +31,12 @@ public class CharacterMovement : MonoBehaviour {
             Movement(false);
         } else if (GameManager.instance.battleManager.battling) {
             rigid.velocity = Vector2.zero;
+            x = 0;
+            y = 0;
+        } else if (GameManager.instance.menuOpen) {
+            rigid.velocity = Vector2.zero;
+            x = 0;
+            y = 0;
         } else {
             Movement(true);
         }
@@ -44,10 +50,10 @@ public class CharacterMovement : MonoBehaviour {
             y = Input.GetAxisRaw("Vertical");
         }
 
-        if (x != 0 || y != 0) {
+        /* if (x != 0 || y != 0) {
             if(!GameManager.instance.terminarManager.methodsLines.LastOrDefault().Equals("CharacterMovement.Movement()"))
                 GameManager.instance.terminarManager.AddMethod("CharacterMovement.Movement()");
-        }
+        } */
 
         rigid.velocity = new Vector2(x, y) * speed;
 

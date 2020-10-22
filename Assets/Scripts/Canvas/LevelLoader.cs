@@ -90,6 +90,7 @@ public class LevelLoader : MonoBehaviour {
     }
 
     IEnumerator LoadLevelMainMenu() {
+        GameManager.instance.LoadGame();
 
         GameManager.instance.enemyMove = false;
 
@@ -140,10 +141,6 @@ public class LevelLoader : MonoBehaviour {
         yield return new WaitForSeconds(transitionTime);
 
         transition[index].gameObject.SetActive(false);
-
-        GameManager.instance.canMove = true;
-
-        GameManager.instance.enemyMove = true;
 
     }
 

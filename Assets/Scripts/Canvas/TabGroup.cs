@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class TabGroup : MonoBehaviour
-{
+public class TabGroup : MonoBehaviour {
     public List<TabButton> tabButtons;
 
     public List<GameObject> objectsToSwap;
@@ -19,7 +18,7 @@ public class TabGroup : MonoBehaviour
     public TabButton selectedButton;
 
     public void AddToTabList(TabButton button) {
-        if(tabButtons == null) {
+        if (tabButtons == null) {
             tabButtons = new List<TabButton>();
         }
 
@@ -48,8 +47,8 @@ public class TabGroup : MonoBehaviour
         button.background.sprite = tabActive;
         int index = button.transform.GetSiblingIndex();
 
-        for(int i = 0; i < objectsToSwap.Count; i++) {
-            if(i == index) {
+        for (int i = 0; i < objectsToSwap.Count; i++) {
+            if (i == index) {
                 objectsToSwap[i].SetActive(true);
             } else {
                 objectsToSwap[i].SetActive(false);
@@ -60,11 +59,9 @@ public class TabGroup : MonoBehaviour
 
     public void ResetTabs() {
 
-        foreach(TabButton button in tabButtons) {
-
-            if(selectedButton != null && button == selectedButton) { continue; }
-            button.background.sprite = tabIdle;
-
+        foreach (TabButton button in tabButtons) {
+            if (selectedButton != null && button == selectedButton) { continue; }
+                button.background.sprite = tabIdle;
         }
 
     }
@@ -73,7 +70,7 @@ public class TabGroup : MonoBehaviour
 
         selectedButton = null;
         for (int i = 0; i < objectsToSwap.Count; i++) {
-                objectsToSwap[i].SetActive(false);
+            objectsToSwap[i].SetActive(false);
         }
 
         mainMenu.SetActive(true);

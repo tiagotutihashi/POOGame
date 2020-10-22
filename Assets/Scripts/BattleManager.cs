@@ -48,7 +48,7 @@ public class BattleManager : MonoBehaviour {
 
     void Start() {
 
-        GameManager.instance.terminarManager.AddObj("BattleManager");
+        GameManager.instance.terminarManager.AddObj(gameObject.name, "BattleManager");
 
     }
 
@@ -271,17 +271,19 @@ public class BattleManager : MonoBehaviour {
             ExitBattleField();
         }
         battleMenus[playerId].gameObject.SetActive(false);
+        battleMenus[playerId].action = true;
 
         GameManager.instance.terminarManager.AddMethod("BattleManager.EscapeBattle()");
 
     }
 
     public void LoadGame() {
-        SceneManager.LoadScene(9);
+        ExitBattleField();
+        GameManager.instance.levelLoader.LoadFromMainMenu();
     }
 
     public void GoToMainMenu() {
-        SceneManager.LoadScene(9);
+        GameManager.instance.levelLoader.LoadToMainMenu();
     }
 
     public void ExitGame() {
@@ -296,8 +298,14 @@ public class BattleManager : MonoBehaviour {
 
         expToGive = 0;
         gold = 0;
+        inspected = false;
+
+        for (int index = 0; index < buttonInspect.Count; index++) {
+            buttonInspect[index].interactable = true;
+        }
 
         GameManager.instance.canMove = false;
+        GameManager.instance.enemyMove = false;
 
         for (int index = 0; index < battleMenus.Length; index++) {
             battleMenus[index].GetComponent<TabGroup>().mainMenu.SetActive(true);

@@ -28,7 +28,6 @@ public class MainMenu : MonoBehaviour {
 
     public void Continue() {
         DisableButtons(false);
-        GameManager.instance.LoadGame();
         load.LoadFromMainMenu();
     }
 

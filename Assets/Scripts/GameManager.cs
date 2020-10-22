@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
 
     public bool canMove = true;
     public bool enemyMove = true;
+    public bool menuOpen = false;
 
     public TabButton characterButton;
     public GameObject selectContainer;
@@ -32,39 +33,41 @@ public class GameManager : MonoBehaviour {
 
     public TerminarManager terminarManager;
 
+    public LevelLoader levelLoader;
+
     void Start() {
 
-        if(GameManager.instance == null) {
+        if (GameManager.instance == null) {
             instance = this;
-
-            DontDestroyOnLoad(this);
-
-            GetUseItems();
-            GetEquipItems();
         } else {
-
-            Destroy(gameObject);
-
+            Destroy(GameManager.instance.gameObject);
+            GameManager.instance = this;
         }
+
+        DontDestroyOnLoad(this);
+
+        GetUseItems();
+        GetEquipItems();
 
     }
 
     void Update() {
 
-        if (Input.GetKeyDown(KeyCode.Q)) {
+        if (Input.GetKeyDown(KeyCode.Q) && canMove) {
             SaveGame();
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E) && canMove) {
             LoadGame();
         }
 
         if (Input.GetKeyDown(KeyCode.Tab)) {
-            if (menu.activeInHierarchy) {
-                DeactivateMenu();
-            } else {
-                ActivateMenu();
-            }
+            if (!battleManager.battling)
+                if (menu.activeInHierarchy) {
+                    DeactivateMenu();
+                } else if (canMove) {
+                    ActivateMenu();
+                }
         }
 
     }
@@ -75,13 +78,21 @@ public class GameManager : MonoBehaviour {
         selectContainer.SetActive(false);
         charDetailsContainer.SetActive(false);
 
+        canMove = true;
+        enemyMove = true;
+        menuOpen = false;
+
         terminarManager.AddMethod("GameManager.DeactivateMenu()");
     }
 
     public void ActivateMenu() {
         menu.SetActive(true);
-        menu.GetComponentInChildren<TabGroup>().OnTabSelect(characterButton);
+        //menu.GetComponentInChildren<TabGroup>().OnTabSelect(characterButton);
         characterListMenu.LoadItems();
+
+        canMove = false;
+        enemyMove = false;
+        menuOpen = true;
 
         terminarManager.AddMethod("GameManager.ActivateMenu()");
     }
@@ -120,7 +131,7 @@ public class GameManager : MonoBehaviour {
             for (int f = 0; f < player.Length; f++) {
                 if (newItem.itemName.Equals(player[f].attItem.itemName) || newItem.itemName.Equals(player[f].defItem.itemName)) {
                     newItem.equiped = f;
-                } 
+                }
             }
             playerEquipItems.Add(newItem);
 
@@ -141,7 +152,7 @@ public class GameManager : MonoBehaviour {
             } else {
                 newItem.amount = playerUseItemsAmount[i];
             }
-            if(playerUseItemsAmount[i] > 0)
+            if (playerUseItemsAmount[i] > 0)
                 playerUseItems.Add(newItem);
         }
 
@@ -151,13 +162,16 @@ public class GameManager : MonoBehaviour {
 
     public void SaveGame() {
 
+        //Salvar o gold
         PlayerPrefs.SetInt("gold", gold);
 
+        ///Salvar a posição personagem
         PlayerPrefs.SetInt("Current_Scene", SceneManager.GetActiveScene().buildIndex);
         PlayerPrefs.SetFloat("Player_Position_x", player[0].gameObject.transform.position.x);
         PlayerPrefs.SetFloat("Player_Position_y", player[0].gameObject.transform.position.y);
         PlayerPrefs.SetFloat("Player_Position_z", player[0].gameObject.transform.position.z);
 
+        //Salvar os status dos personagens
         for (int i = 0; i <= player.Length - 1; i++) {
 
             PlayerPrefs.SetString("Player_" + i, player[i].charName);
@@ -174,11 +188,17 @@ public class GameManager : MonoBehaviour {
 
         }
 
-        for (int i = 0; i <= allUseItems.Count - 1; i++) {
+        //Salvar os itens consumíveis
+        PlayerPrefs.SetInt("UseItem_Amount", playerUseItemsAmount.Count);
+
+        for (int i = 0; i <= playerUseItemsAmount.Count - 1; i++) {
 
             PlayerPrefs.SetInt("UseItem_" + i, allUseItems[i].amount);
 
         }
+
+        //Salvar os equips
+        PlayerPrefs.SetInt("EquipItem", playerEquipItemsHave);
 
         terminarManager.AddMethod("GameManager.SaveGame()");
 
@@ -186,10 +206,11 @@ public class GameManager : MonoBehaviour {
 
     public void LoadGame() {
 
+        // Carregar gold
         gold = PlayerPrefs.GetInt("gold");
 
+        // Carregar Status
         for (int i = 0; i <= player.Length - 1; i++) {
-
             player[i].charName = PlayerPrefs.GetString("Player_" + i);
             player[i].level = PlayerPrefs.GetInt("Player_" + i + "_Level");
             player[i].exp = PlayerPrefs.GetInt("Player_" + i + "_Exp");
@@ -201,14 +222,20 @@ public class GameManager : MonoBehaviour {
             player[i].defense = PlayerPrefs.GetInt("Player_" + i + "_Defense");
             player[i].attItem.itemName = PlayerPrefs.GetString("Player_" + i + "_Weapon");
             player[i].defItem.itemName = PlayerPrefs.GetString("Player_" + i + "_Armor");
-
         }
 
-        /*for (int i = 0; i <= allUseItems.Count - 1; i++) {
+        //Carregar itens consumíveis
+        playerUseItems.Clear();
 
-            PlayerPrefs.SetInt("UseItem_" + i, allUseItems[i].amount);
+        for (int i = 0; i <= PlayerPrefs.GetInt("UseItem_Amount") - 1; i++) {
+            playerUseItemsAmount[i] = PlayerPrefs.GetInt("UseItem_" + i);
+        }
 
-        } */
+        //Carrregar equips
+        playerEquipItemsHave = PlayerPrefs.GetInt("EquipItem");
+
+        GetUseItems();
+        GetEquipItems();
 
         terminarManager.AddMethod("GameManager.LoadGame()");
 

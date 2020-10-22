@@ -17,9 +17,9 @@ public class ItemSelect : MonoBehaviour {
 
         GetComponentInParent<Transform>().GetComponentInParent<ItemMenu>().selectedItem = selected;
         playerTarget = GetComponentInParent<Transform>().GetComponentInParent<ItemMenu>().targetMenu;
-
-        playerTarget.gameObject.SetActive(true);
         playerTarget.selected = selected;
+        playerTarget.gameObject.SetActive(true);
+        playerTarget.LoadItems();
         GetComponentInParent<Transform>().GetComponentInParent<ItemMenu>().itemMenu.SetActive(false);
         
 

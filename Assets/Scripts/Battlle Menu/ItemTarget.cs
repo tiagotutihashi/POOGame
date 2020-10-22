@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ItemTarget : MonoBehaviour {
 
-    public List<PlayerStats> players = new List<PlayerStats>();
-
     public BattleManager battleManager;
 
     public UseItem selected;
@@ -71,20 +69,17 @@ public class ItemTarget : MonoBehaviour {
 
     }
 
-    void Start() {
-
-        players.AddRange(GameManager.instance.player);
+    public void LoadItems() {
 
         targetButtons[0].gameObject.SetActive(false);
         targetButtons[1].gameObject.SetActive(false);
 
-        for (int i = 0; i <= players.Count - 1; i++) {
-
+        for (int i = 0; i <= GameManager.instance.player.Length - 1; i++) {
             targetButtons[i].gameObject.SetActive(true);
             targetButtons[i].interactable = true;
-            targetButtons[i].GetComponentInChildren<Text>().text = players[i].charName;
+            targetButtons[i].GetComponentInChildren<Text>().text = GameManager.instance.player[i].charName;
 
-            if ((selected.mana > 0 && (players[i].mana == players[i].maxMana)) || (selected.hp > 0 && (players[i].hp == players[i].maxHp))) {
+            if ((selected.mana > 0 && (GameManager.instance.player[i].mana == GameManager.instance.player[i].maxMana)) || (selected.hp > 0 && (GameManager.instance.player[i].hp == GameManager.instance.player[i].maxHp))) {
                 targetButtons[i].gameObject.SetActive(true);
                 targetButtons[i].interactable = false;
                 targetButtons[i].GetComponentInChildren<Text>().color = Color.red;
@@ -93,7 +88,6 @@ public class ItemTarget : MonoBehaviour {
         }
 
         backButton.transform.SetAsLastSibling();
-
     }
 
 }

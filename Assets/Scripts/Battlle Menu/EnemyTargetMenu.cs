@@ -74,7 +74,7 @@ public class EnemyTargetMenu : MonoBehaviour {
 
     }
 
-    void Start() {
+    public void LoadEnemiesButtons() {
 
         enemies = battleManager.enemyName;
 

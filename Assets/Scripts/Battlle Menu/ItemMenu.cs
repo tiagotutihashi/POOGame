@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ItemMenu : MonoBehaviour {
 
-    public GameObject backButton;
+    public Button backButton;
 
     public GameObject defaultButton;
 
@@ -17,6 +17,10 @@ public class ItemMenu : MonoBehaviour {
 
     public UseItem selectedItem;
 
+    public GameObject initialMenu;
+
+    public GameObject battleMenu;
+
     void SetItem(UseItem selected) {
 
         selectedItem = selected;
@@ -24,7 +28,15 @@ public class ItemMenu : MonoBehaviour {
 
     }
 
-    void Start() {
+    public void LoadItems() {
+
+        gameObject.SetActive(true);
+
+        initialMenu.SetActive(false);
+
+        foreach (Transform child in itemMenu.transform) {
+            Destroy(child.gameObject);
+        }
 
         buttonGroup = GetComponent<TabGroup>();
 
@@ -38,8 +50,11 @@ public class ItemMenu : MonoBehaviour {
             newB.GetComponent<Button>().onClick.AddListener(() => SetItem(item));
         }
 
-        backButton.transform.SetAsLastSibling();
+        Button newBackButton = Instantiate(backButton, itemMenu.transform);
+        newBackButton.onClick.AddListener(() => gameObject.SetActive(false));
+        newBackButton.onClick.AddListener(() => battleMenu.GetComponent<TabGroup>().BackTab());
 
+        GameManager.instance.terminarManager.AddMethod("ItemMenu.LoadItems()");
     }
 
 }

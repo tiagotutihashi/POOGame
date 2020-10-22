@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,17 +8,42 @@ public class TerminarManager : MonoBehaviour {
 
     public Text methodsText;
     public Text objsText;
+    public TMP_InputField inputText;
 
     public List<string> methodsLines;
     public List<string> objsLines;
+    public List<string> objsTypes;
 
     public int maxLines = 10;
+
+    private void Update() {
+        /* if (inputText.isFocused) {
+            GameManager.instance.canMove = false;
+        } else {
+            GameManager.instance.canMove = true;
+        } */
+    }
+
+    public void ExecuteMethod() {
+        string inputValue = inputText.text; ;
+        if (inputValue.Split('.').Length == 2) {
+            string obj = inputValue.Split('.')[0];
+            string method = inputValue.Split('.')[1];
+            GameObject gameO = GameObject.Find(obj);
+
+            if (gameO.GetComponent<AreaExitTerminal>()) {
+                gameO.GetComponent<AreaExitTerminal>().ExecuteMethod(method);
+            }
+        }
+
+        inputText.text = "";
+    }
 
     public void UpdateMethodList() {
 
         string lines = "";
 
-        foreach(string line in methodsLines) {
+        foreach (string line in methodsLines) {
             lines += line + "\n";
         }
 
@@ -29,8 +55,8 @@ public class TerminarManager : MonoBehaviour {
 
         string lines = "";
 
-        foreach (string line in objsLines) {
-            lines += line + "\n";
+        for (int i = 0; i <= objsLines.Count - 1; i++) {
+            lines += objsLines[i] + "-" + objsTypes[i] + "\n";
         }
 
         objsText.text = lines;
@@ -45,10 +71,12 @@ public class TerminarManager : MonoBehaviour {
         UpdateMethodList();
     }
 
-    public void AddObj(string line) {
+    public void AddObj(string line, string type) {
         objsLines.Add(line);
+        objsTypes.Add(type);
         if (objsLines.Count >= maxLines) {
             objsLines.RemoveAt(0);
+            objsTypes.RemoveAt(0);
         }
         UpdateObjList();
     }

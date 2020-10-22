@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498755245}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.01, y: -0.51, z: 0}
+  m_LocalPosition: {x: -0.07, y: -1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6285573653878856822}
@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionName: 2-3
-  player: {fileID: 0}
 --- !u!1 &6285573653878856816
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,6 +55,7 @@ GameObject:
   - component: {fileID: 6285573653878856822}
   - component: {fileID: 6285573653878856817}
   - component: {fileID: 6285573653878856823}
+  - component: {fileID: 1268674422}
   m_Layer: 0
   m_Name: Area Exit
   m_TagString: Untagged
@@ -102,7 +102,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.935936}
+  m_Size: {x: 1.935936, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &6285573653878856823
 MonoBehaviour:
@@ -117,6 +117,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaToLoad: 1
+  isX: 0
+  isY: 0
+  negativeX: 0
+  negativeY: 0
   areaTransitionName: 2-3
-  loader: {fileID: 0}
-  player: {fileID: 0}
+  entrance: {fileID: 0}
+  open: 1
+  methods: []
+--- !u!114 &1268674422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285573653878856816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5f2584085769f46a46efdeb4be90d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaExit: {fileID: 0}

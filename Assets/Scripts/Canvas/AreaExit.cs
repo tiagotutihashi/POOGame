@@ -18,7 +18,9 @@ public class AreaExit : MonoBehaviour {
 
     private LevelLoader loader;
     private CharacterMovement player;
-    private AreaEntrace entrance;
+    public AreaEntrace entrance;
+
+    public bool open = true;
 
     void Start() {
         entrance = GetComponentInChildren<AreaEntrace>();
@@ -27,7 +29,14 @@ public class AreaExit : MonoBehaviour {
 
         entrance.transitionName = areaTransitionName;
 
-        GameManager.instance.terminarManager.AddObj("AreaExit");    
+        GameManager.instance.terminarManager.AddObj(gameObject.name,"AreaExit"); 
+
+    }
+
+    public void setOpen(bool newOpen) {
+
+        open = newOpen;
+
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -49,9 +58,10 @@ public class AreaExit : MonoBehaviour {
                 player.x = 0;
             }
 
+            player.areaTransitionName = areaTransitionName;
+
             loader.LoadNextLevel(areaToLoad);
 
-            player.areaTransitionName = areaTransitionName;
         }
     }
 
