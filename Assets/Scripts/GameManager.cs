@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour {
 
     public LevelLoader levelLoader;
 
+    public DialogManager dialogManager;
+
     void Start() {
 
         if (GameManager.instance == null) {
@@ -53,13 +55,13 @@ public class GameManager : MonoBehaviour {
 
     void Update() {
 
-        if (Input.GetKeyDown(KeyCode.Q) && canMove) {
+        /* if (Input.GetKeyDown(KeyCode.Q) && canMove) {
             SaveGame();
         }
 
         if (Input.GetKeyDown(KeyCode.E) && canMove) {
             LoadGame();
-        }
+        } */
 
         if (Input.GetKeyDown(KeyCode.Tab)) {
             if (!battleManager.battling)
@@ -247,6 +249,12 @@ public class GameManager : MonoBehaviour {
         menu.SetActive(false);
 
         terminarManager.AddMethod("GameManager.GoToMainMenu()");
+
+    }
+
+    public bool haveSave() {
+
+        return PlayerPrefs.GetInt("Current_Scene") == 0;
 
     }
 

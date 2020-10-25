@@ -9,9 +9,16 @@ public class MainMenu : MonoBehaviour {
     public LevelLoader load;
     public Button[] buttons;
 
+    public List<string> firstDilog = new List<string>();
+    public List<int> firstSpeakers = new List<int>();
+
     void Start() {
 
         load = GameManager.instance.gameObject.GetComponentInChildren<LevelLoader>();
+
+        if (GameManager.instance.haveSave()) {
+            buttons[1].gameObject.SetActive(false);
+        }
 
     }
 
@@ -23,7 +30,7 @@ public class MainMenu : MonoBehaviour {
 
     public void NewGame() {
         DisableButtons(false);
-        load.LoadFromLoad(2);
+        load.LoadFirst(8, firstDilog, firstSpeakers);
     }
 
     public void Continue() {

@@ -23,6 +23,11 @@ public class LevelLoader : MonoBehaviour {
         GameManager.instance.terminarManager.AddMethod("LevelLoader.LoadFromLoad()");
     }
 
+    public void LoadFirst(int nextScene, List<string> newDialog, List<int> howSpeaks) {
+        StartCoroutine(LoadFirstLevel(nextScene, newDialog, howSpeaks));
+        GameManager.instance.terminarManager.AddMethod("LevelLoader.LoadFirst()");
+    }
+
     public void LoadFromMainMenu() {
         StartCoroutine(LoadLevelMainMenu());
         GameManager.instance.terminarManager.AddMethod("LevelLoader.LoadFromMainMenu()");
@@ -86,6 +91,38 @@ public class LevelLoader : MonoBehaviour {
         GameManager.instance.canMove = true;
 
         GameManager.instance.enemyMove = true;
+
+    }
+
+    IEnumerator LoadFirstLevel(int levelIndex, List<string> newDialog, List<int> howSpeaks) {
+
+        GameManager.instance.enemyMove = false;
+
+        GameManager.instance.canMove = false;
+
+        transition[index].gameObject.SetActive(true);
+
+        transition[index].SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
+
+        transition[index].SetTrigger("End");
+
+        player.gameObject.SetActive(true);
+
+        player.gameObject.transform.position = new Vector3(0, 0, 0);
+
+        yield return new WaitForSeconds(transitionTime);
+
+        transition[index].gameObject.SetActive(false);
+
+        GameManager.instance.canMove = true;
+
+        GameManager.instance.enemyMove = true;
+
+        GameManager.instance.dialogManager.StartDialog(newDialog, howSpeaks);
 
     }
 

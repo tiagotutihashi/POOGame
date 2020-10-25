@@ -40,7 +40,7 @@ public class AreaExit : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Player" && GameManager.instance.canMove) {
+        if (other.tag == "Player" && GameManager.instance.canMove && open) {
             if (isX) {
                 if (negativeX) {
                     player.x = directionX * -1;

@@ -46,6 +46,8 @@ public class BattleManager : MonoBehaviour {
     public Text[] playerLvlText;
     public Bar[] playerBar;
 
+    public Button continueButton;
+
     void Start() {
 
         GameManager.instance.terminarManager.AddObj(gameObject.name, "BattleManager");
@@ -242,6 +244,9 @@ public class BattleManager : MonoBehaviour {
         }
 
         if (lose) {
+            if (GameManager.instance.haveSave()) {
+                continueButton.gameObject.SetActive(false);
+            }
             endPanel.SetActive(true);
             losePanel.SetActive(true);
             winPanel.SetActive(false);

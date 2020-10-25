@@ -511,6 +511,12 @@ MonoBehaviour:
   - {fileID: 1237296904}
   - {fileID: 124827317}
   - {fileID: 1835558429}
+  firstDilog:
+  - Bem vindo ao jogo POO
+  - "Neste jogo voc\xEA ir\xE1 aprender conceitos de poo"
+  - Jogo ainda em desenvolvimento
+  - Feedbacks no survey, obrigado
+  firstSpeakers: 00000000010000000000000001000000
 --- !u!1 &752272254
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,25 +984,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6245622997617295489, guid: 80e7cf7ab53ba9e449b3ea221087be85,
-        type: 3}
-      propertyPath: canMove
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6245622997617295489, guid: 80e7cf7ab53ba9e449b3ea221087be85,
-        type: 3}
-      propertyPath: enemyMove
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6245622997617295519, guid: 80e7cf7ab53ba9e449b3ea221087be85,
         type: 3}
       propertyPath: m_Name
       value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 6245622999070327587, guid: 80e7cf7ab53ba9e449b3ea221087be85,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80e7cf7ab53ba9e449b3ea221087be85, type: 3}

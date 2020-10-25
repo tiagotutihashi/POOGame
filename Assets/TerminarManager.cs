@@ -16,12 +16,16 @@ public class TerminarManager : MonoBehaviour {
 
     public int maxLines = 10;
 
-    private void Update() {
-        /* if (inputText.isFocused) {
-            GameManager.instance.canMove = false;
-        } else {
-            GameManager.instance.canMove = true;
-        } */
+    public void StopWrite() {
+
+        GameManager.instance.canMove = true;
+
+    }
+
+    public void StartWhite() {
+
+        GameManager.instance.canMove = false;
+
     }
 
     public void ExecuteMethod() {
