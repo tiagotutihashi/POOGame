@@ -33,10 +33,14 @@ public class CharacterMovement : MonoBehaviour {
             rigid.velocity = Vector2.zero;
             x = 0;
             y = 0;
+            anim.SetFloat("moveX", rigid.velocity.x);
+            anim.SetFloat("moveY", rigid.velocity.y);
         } else if (GameManager.instance.menuOpen) {
             rigid.velocity = Vector2.zero;
             x = 0;
             y = 0;
+            anim.SetFloat("moveX", rigid.velocity.x);
+            anim.SetFloat("moveY", rigid.velocity.y);
         } else {
             Movement(true);
         }

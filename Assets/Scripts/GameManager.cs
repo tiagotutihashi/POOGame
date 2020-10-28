@@ -37,6 +37,10 @@ public class GameManager : MonoBehaviour {
 
     public DialogManager dialogManager;
 
+    public List<int> eventsDone = new List<int>();
+
+    public bool openMenuOnce = false;
+
     void Start() {
 
         if (GameManager.instance == null) {
@@ -89,7 +93,11 @@ public class GameManager : MonoBehaviour {
 
     public void ActivateMenu() {
         menu.SetActive(true);
-        //menu.GetComponentInChildren<TabGroup>().OnTabSelect(characterButton);
+        if(openMenuOnce)
+            menu.GetComponentInChildren<TabGroup>().OnTabSelect(characterButton);
+
+        openMenuOnce = true;
+
         characterListMenu.LoadItems();
 
         canMove = false;
@@ -202,6 +210,12 @@ public class GameManager : MonoBehaviour {
         //Salvar os equips
         PlayerPrefs.SetInt("EquipItem", playerEquipItemsHave);
 
+        //Salvar números de eventos feitos
+        PlayerPrefs.SetInt("EventsDone_total", eventsDone.Count);
+        for (int i = 0; i <= eventsDone.Count - 1; i++) {
+            PlayerPrefs.SetInt("EventsDone_" + i, eventsDone[i]);
+        }
+
         terminarManager.AddMethod("GameManager.SaveGame()");
 
     }
@@ -238,6 +252,12 @@ public class GameManager : MonoBehaviour {
 
         GetUseItems();
         GetEquipItems();
+
+        for (int i = 0; i <= PlayerPrefs.GetInt("EventsDone_total") - 1; i++) {
+
+            eventsDone[i] = PlayerPrefs.GetInt("EventsDone_" + i);
+
+        }
 
         terminarManager.AddMethod("GameManager.LoadGame()");
 

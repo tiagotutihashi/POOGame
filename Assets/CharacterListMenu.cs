@@ -31,7 +31,7 @@ public class CharacterListMenu : MonoBehaviour {
             button.manaBar.SetMaxValue(player.maxMana);
             button.manaBar.SetValue(player.mana);
 
-            button.expBar.SetMaxValue(player.maxExp);
+            button.expBar.SetMaxValue(player.CalcMaxExp());
             button.expBar.SetValue(player.exp);
 
             playerContainer[i].GetComponent<Button>().onClick.AddListener(() => SetItem(player));

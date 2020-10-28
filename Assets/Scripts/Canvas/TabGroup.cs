@@ -37,7 +37,7 @@ public class TabGroup : MonoBehaviour {
     public void OnTabExit(TabButton button) {
 
         ResetTabs();
-
+        
     }
 
     public void OnTabSelect(TabButton button) {

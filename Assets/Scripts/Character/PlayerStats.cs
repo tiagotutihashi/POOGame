@@ -37,16 +37,10 @@ public class PlayerStats : CharacterStats {
 
     }
 
-    public void GetExp(int expToGain) {
+    public int CalcMaxExp() {
 
-        int expToLevelUp = (int)(level * expBase * 1.8);
-
-        exp = expToGain;
-
-        if(expToLevelUp <= exp) {
-            level++;
-            exp -= expToLevelUp;
-        }
+        maxExp = (expBase * level) / 7;
+        return maxExp;
 
     }
 

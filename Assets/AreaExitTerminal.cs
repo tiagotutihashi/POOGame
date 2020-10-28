@@ -15,6 +15,7 @@ public class AreaExitTerminal : MonoBehaviour {
         switch (method) {
             case "setOpen(true)":
                 areaExit.setOpen(true);
+                GameManager.instance.eventsDone[0] = 1;
                 break;
             case "setOpen(false)":
                 areaExit.setOpen(false);

@@ -207,7 +207,7 @@ public class BattleManager : MonoBehaviour {
                 bool stop = true;
                 int expToLevelUp = 0;
                 do {
-                    expToLevelUp = (characterStatus[index].expBase * characterStatus[index].level) / 7;
+                    expToLevelUp = characterStatus[index].CalcMaxExp();
                     if (characterStatus[index].exp >= expToLevelUp) {
                         characterStatus[index].exp -= expToLevelUp;
                         characterStatus[index].level += 1;
@@ -284,6 +284,7 @@ public class BattleManager : MonoBehaviour {
 
     public void LoadGame() {
         ExitBattleField();
+        GameManager.instance.player[0].GetComponent<CharacterMovement>().areaTransitionName = "";
         GameManager.instance.levelLoader.LoadFromMainMenu();
     }
 
