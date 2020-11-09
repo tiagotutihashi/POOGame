@@ -100,11 +100,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Cavaleiro
   level: 1
-  hp: 5
-  maxHp: 5
+  hp: 10
+  maxHp: 10
   mana: 1
   maxMana: 1
-  attack: 311
+  attack: 20
   defense: 10
   attackList:
   - {fileID: 3246332434152961584, guid: 6aa1e4d74d5c01643954f45d5d12185b, type: 3}

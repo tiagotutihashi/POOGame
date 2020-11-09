@@ -103,3 +103,4 @@ MonoBehaviour:
   attack: 10
   defense: 0
   equiped: 0
+  type: 0

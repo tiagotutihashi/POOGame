@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour {
 
     public List<string> firstDilog = new List<string>();
     public List<int> firstSpeakers = new List<int>();
+    public List<Sprite> firstImages = new List<Sprite>();
 
     void Start() {
 
@@ -30,7 +31,7 @@ public class MainMenu : MonoBehaviour {
 
     public void NewGame() {
         DisableButtons(false);
-        load.LoadFirst(8, firstDilog, firstSpeakers);
+        load.LoadFirst(8, firstDilog, firstSpeakers, firstImages);
     }
 
     public void Continue() {

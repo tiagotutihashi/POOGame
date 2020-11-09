@@ -70,16 +70,20 @@ public class BattleManager : MonoBehaviour {
 
                 ProcessBattle();
 
-            } else if(battleMenus[0].action && battleMenus[1].action) {
+            } else if (battleMenus[0].action && battleMenus[1].action) {
                 EnemyTurns();
                 ProcessBattle();
                 if (characterStatus[0].hp > 0) {
                     battleMenus[0].action = false;
                     battleMenus[0].gameObject.SetActive(true);
-                } else if(characterStatus[1].hp > 0) {
-                    battleMenus[1].action = false;
-                    battleMenus[1].gameObject.SetActive(true);
                 }
+                if (characterStatus[1].hp > 0) {
+                    battleMenus[1].action = false;
+                    if (characterStatus[0].hp <= 0) {
+                        battleMenus[1].gameObject.SetActive(true);
+                    }
+                }
+
             }
 
         }
@@ -162,7 +166,7 @@ public class BattleManager : MonoBehaviour {
         if (charStats.hp <= 0) {
             battleMenus[target].action = true;
             battleMenus[target].gameObject.SetActive(false);
-        }       
+        }
     }
 
     public void Inspect(int playerId) {
@@ -263,6 +267,7 @@ public class BattleManager : MonoBehaviour {
         gameObject.SetActive(false);
         GameManager.instance.canMove = true;
         GameManager.instance.enemyMove = true;
+        GameManager.instance.ActivateTopButtons();
 
         GameManager.instance.terminarManager.AddMethod("BattleManager.ExitBattleField()");
 
@@ -312,6 +317,7 @@ public class BattleManager : MonoBehaviour {
 
         GameManager.instance.canMove = false;
         GameManager.instance.enemyMove = false;
+        GameManager.instance.DeactivateTopButtons();
 
         for (int index = 0; index < battleMenus.Length; index++) {
             battleMenus[index].GetComponent<TabGroup>().mainMenu.SetActive(true);

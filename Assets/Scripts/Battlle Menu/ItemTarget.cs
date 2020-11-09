@@ -78,6 +78,7 @@ public class ItemTarget : MonoBehaviour {
             targetButtons[i].gameObject.SetActive(true);
             targetButtons[i].interactable = true;
             targetButtons[i].GetComponentInChildren<Text>().text = GameManager.instance.player[i].charName;
+            targetButtons[i].GetComponentInChildren<Text>().color = Color.black;
 
             if ((selected.mana > 0 && (GameManager.instance.player[i].mana == GameManager.instance.player[i].maxMana)) || (selected.hp > 0 && (GameManager.instance.player[i].hp == GameManager.instance.player[i].maxHp))) {
                 targetButtons[i].gameObject.SetActive(true);

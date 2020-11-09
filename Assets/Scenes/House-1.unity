@@ -269,13 +269,39 @@ MonoBehaviour:
   - "Por que n\xE3o conseguimos passar por essa porta ?"
   - Acho que devemos abrir a porta antes.
   - Como fazemos isso ?
-  - "Pelo terminal d\xE1 para ver que tem um objeto do tipo AreaExit que se chama
-    porta."
-  - "Podemos utilizar o m\xE9todo setOpen passando true como par\xE2metro."
+  - "Pelo terminal d\xE1 para ver que tem um objeto chamado Porta da classe AreaExit."
+  - "N\xE3o entendi Poi. O que seria uma classe ?"
+  - "Classe \xE9 uma abstra\xE7\xE3o de um conjunto de objetos parecidos contidos
+    no dom\xEDnio do sistema de software. Ou seja, classe \xE9 um modelo que cont\xE9m
+    as propriedades e os comportamentos de um determinado grupo de objetos."
+  - "As propriedades s\xE3o chamadas de atributos e os comportamentos de m\xE9todo."
+  - "Em resumo, classe \xE9 um modelo para criar objetos com mesmas caracter\xEDsticas
+    e comportamentos semelhantes. "
+  - "Entendi. Ent\xE3o, um objeto \xE9 uma \u201Ccoisa\u201D moldada de uma classe
+    para ter as mesmas caracter\xEDsticas de uma classe."
+  - Exato. Sendo os seus valores dos atributos o estado atual do objeto.
+  - "Por isso que neste caso, podemos utilizar o m\xE9todo setOpen passando como
+    par\xE2metro true, do objeto Porta, j\xE1 que Porta \xE9 uma inst\xE2ncia da
+    classe AreaExit."
   - "Ent\xE3o usamos Porta.setOpen(true) no terminal ?"
   - Acho que sim.
   - Ok, vamos tentar.
-  dialogSpearkers: 0000000001000000000000000100000001000000000000000100000000000000
+  dialogSpearkers: 0000000001000000000000000100000000000000010000000100000001000000000000000100000001000000000000000100000000000000
+  dialogImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: ee0e1e40aa4f31f4fad0a5063dbe08ac, type: 3}
+  - {fileID: 21300000, guid: ee0e1e40aa4f31f4fad0a5063dbe08ac, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 79ccf823baad37a468b24c7532062e0c, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   once: 0
   door: {fileID: 2015813004}
 --- !u!1 &1595790691

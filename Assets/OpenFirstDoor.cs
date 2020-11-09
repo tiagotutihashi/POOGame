@@ -6,6 +6,7 @@ public class OpenFirstDoor : MonoBehaviour {
 
     public List<string> dialogLines = new List<string>();
     public List<int> dialogSpearkers = new List<int>();
+    public List<Sprite> dialogImages = new List<Sprite>();
 
     public bool once = false;
 
@@ -19,8 +20,7 @@ public class OpenFirstDoor : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (!once && !door.open && GameManager.instance.eventsDone[0] == 0) {
-            GameManager.instance.dialogManager.StartDialog(dialogLines, dialogSpearkers);
-            
+            GameManager.instance.dialogManager.StartDialog(dialogLines, dialogSpearkers, dialogImages);
         }
     }
 

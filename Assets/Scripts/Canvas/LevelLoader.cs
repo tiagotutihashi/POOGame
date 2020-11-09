@@ -23,8 +23,8 @@ public class LevelLoader : MonoBehaviour {
         GameManager.instance.terminarManager.AddMethod("LevelLoader.LoadFromLoad()");
     }
 
-    public void LoadFirst(int nextScene, List<string> newDialog, List<int> howSpeaks) {
-        StartCoroutine(LoadFirstLevel(nextScene, newDialog, howSpeaks));
+    public void LoadFirst(int nextScene, List<string> newDialog, List<int> howSpeaks, List<Sprite> images) {
+        StartCoroutine(LoadFirstLevel(nextScene, newDialog, howSpeaks, images));
         GameManager.instance.terminarManager.AddMethod("LevelLoader.LoadFirst()");
     }
 
@@ -94,7 +94,7 @@ public class LevelLoader : MonoBehaviour {
 
     }
 
-    IEnumerator LoadFirstLevel(int levelIndex, List<string> newDialog, List<int> howSpeaks) {
+    IEnumerator LoadFirstLevel(int levelIndex, List<string> newDialog, List<int> howSpeaks, List<Sprite> images) {
 
         GameManager.instance.enemyMove = false;
 
@@ -122,7 +122,9 @@ public class LevelLoader : MonoBehaviour {
 
         GameManager.instance.enemyMove = true;
 
-        GameManager.instance.dialogManager.StartDialog(newDialog, howSpeaks);
+        GameManager.instance.ActivateTopButtons();
+
+        GameManager.instance.dialogManager.StartDialog(newDialog, howSpeaks, images);
 
     }
 
@@ -155,6 +157,8 @@ public class LevelLoader : MonoBehaviour {
 
         GameManager.instance.enemyMove = true;
 
+        GameManager.instance.ActivateTopButtons();
+
     }
 
     IEnumerator LoadLevelToMainMenu() {
@@ -162,6 +166,8 @@ public class LevelLoader : MonoBehaviour {
         GameManager.instance.enemyMove = false;
 
         GameManager.instance.canMove = false;
+
+        GameManager.instance.DeactivateTopButtons();
 
         transition[index].gameObject.SetActive(true);
 

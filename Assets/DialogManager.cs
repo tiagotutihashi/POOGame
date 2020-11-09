@@ -7,6 +7,7 @@ public class DialogManager : MonoBehaviour {
 
     public List<string> dialogLines = new List<string>();
     public List<int> dialogCharacter = new List<int>();
+    public List<Sprite> dialogImages = new List<Sprite>();
 
     public List<string> dialogCharName = new List<string>();
     public List<Sprite> dialogCharSprite = new List<Sprite>();
@@ -16,6 +17,7 @@ public class DialogManager : MonoBehaviour {
     public Text message;
     public Image charImage;
     public Text charName;
+    public Image image;
     public float typingSpeed = 0.02f;
 
     private IEnumerator currentChat;
@@ -26,6 +28,13 @@ public class DialogManager : MonoBehaviour {
 
         charName.text = dialogCharName[dialogCharacter[index]];
         charImage.sprite = dialogCharSprite[dialogCharacter[index]];
+
+        if(dialogImages[index] == null) {
+            image.gameObject.SetActive(false);
+        } else {
+            image.sprite = dialogImages[index];
+            image.gameObject.SetActive(true);
+        }
 
         foreach (char letter in dialogLines[index].ToCharArray()) {
             message.text += letter;
@@ -48,6 +57,9 @@ public class DialogManager : MonoBehaviour {
             message.text = "";
             GameManager.instance.canMove = true;
             GameManager.instance.enemyMove = true;
+            GameManager.instance.dialogOpen = false;
+            GameManager.instance.ActivateTopButtons();
+
             gameObject.SetActive(false);
         }
     }
@@ -66,15 +78,18 @@ public class DialogManager : MonoBehaviour {
 
     }
 
-    public void StartDialog(List<string> newDialog, List<int> howSpeaks) {
+    public void StartDialog(List<string> newDialog, List<int> howSpeaks, List<Sprite> images) {
 
         gameObject.SetActive(true);
 
         GameManager.instance.canMove = false;
         GameManager.instance.enemyMove = false;
+        GameManager.instance.dialogOpen = true;
+        GameManager.instance.DeactivateTopButtons();
 
         dialogLines = newDialog;
         dialogCharacter = howSpeaks;
+        dialogImages = images;
 
         index = 0; 
         message.text = "";

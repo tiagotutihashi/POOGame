@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
     public bool canMove = true;
     public bool enemyMove = true;
     public bool menuOpen = false;
+    public bool dialogOpen = false;
+    public bool helpOpen = false;
 
     public TabButton characterButton;
     public GameObject selectContainer;
@@ -39,7 +41,11 @@ public class GameManager : MonoBehaviour {
 
     public List<int> eventsDone = new List<int>();
 
+    public int conceptsLearned;
+ 
     public bool openMenuOnce = false;
+
+    public GameObject topButtons;
 
     void Start() {
 
@@ -92,19 +98,22 @@ public class GameManager : MonoBehaviour {
     }
 
     public void ActivateMenu() {
-        menu.SetActive(true);
-        if(openMenuOnce)
-            menu.GetComponentInChildren<TabGroup>().OnTabSelect(characterButton);
 
-        openMenuOnce = true;
+        if (!helpOpen && !dialogOpen) {
+            menu.SetActive(true);
+            if (openMenuOnce)
+                menu.GetComponentInChildren<TabGroup>().OnTabSelect(characterButton);
 
-        characterListMenu.LoadItems();
+            openMenuOnce = true;
 
-        canMove = false;
-        enemyMove = false;
-        menuOpen = true;
+            characterListMenu.LoadItems();
 
-        terminarManager.AddMethod("GameManager.ActivateMenu()");
+            canMove = false;
+            enemyMove = false;
+            menuOpen = true;
+
+            terminarManager.AddMethod("GameManager.ActivateMenu()");
+        }
     }
 
     public void EnemyTrigger(EnemyMovement toBattle) {
@@ -216,6 +225,8 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetInt("EventsDone_" + i, eventsDone[i]);
         }
 
+        PlayerPrefs.SetInt("ConceptsLearned", conceptsLearned);
+
         terminarManager.AddMethod("GameManager.SaveGame()");
 
     }
@@ -224,21 +235,6 @@ public class GameManager : MonoBehaviour {
 
         // Carregar gold
         gold = PlayerPrefs.GetInt("gold");
-
-        // Carregar Status
-        for (int i = 0; i <= player.Length - 1; i++) {
-            player[i].charName = PlayerPrefs.GetString("Player_" + i);
-            player[i].level = PlayerPrefs.GetInt("Player_" + i + "_Level");
-            player[i].exp = PlayerPrefs.GetInt("Player_" + i + "_Exp");
-            player[i].maxHp = PlayerPrefs.GetInt("Player_" + i + "_Max_Hp");
-            player[i].hp = PlayerPrefs.GetInt("Player_" + i + "_Current_Hp");
-            player[i].maxMana = PlayerPrefs.GetInt("Player_" + i + "_Max_Mana");
-            player[i].mana = PlayerPrefs.GetInt("Player_" + i + "_Current_Mana");
-            player[i].attack = PlayerPrefs.GetInt("Player_" + i + "_Attack");
-            player[i].defense = PlayerPrefs.GetInt("Player_" + i + "_Defense");
-            player[i].attItem.itemName = PlayerPrefs.GetString("Player_" + i + "_Weapon");
-            player[i].defItem.itemName = PlayerPrefs.GetString("Player_" + i + "_Armor");
-        }
 
         //Carregar itens consumíveis
         playerUseItems.Clear();
@@ -253,11 +249,29 @@ public class GameManager : MonoBehaviour {
         GetUseItems();
         GetEquipItems();
 
+        // Carregar Status
+        for (int i = 0; i <= player.Length - 1; i++) {
+            player[i].charName = PlayerPrefs.GetString("Player_" + i);
+            player[i].level = PlayerPrefs.GetInt("Player_" + i + "_Level");
+            player[i].exp = PlayerPrefs.GetInt("Player_" + i + "_Exp");
+            player[i].maxHp = PlayerPrefs.GetInt("Player_" + i + "_Max_Hp");
+            player[i].hp = PlayerPrefs.GetInt("Player_" + i + "_Current_Hp");
+            player[i].maxMana = PlayerPrefs.GetInt("Player_" + i + "_Max_Mana");
+            player[i].mana = PlayerPrefs.GetInt("Player_" + i + "_Current_Mana");
+            player[i].attack = PlayerPrefs.GetInt("Player_" + i + "_Attack");
+            player[i].defense = PlayerPrefs.GetInt("Player_" + i + "_Defense"); 
+            player[i].attItem = playerEquipItems.Find(item => item.itemName.Equals(PlayerPrefs.GetString("Player_" + i + "_Weapon")));
+            player[i].defItem = playerEquipItems.Find(item => item.itemName.Equals(PlayerPrefs.GetString("Player_" + i + "_Armor")));
+        }
+ 
+
         for (int i = 0; i <= PlayerPrefs.GetInt("EventsDone_total") - 1; i++) {
 
             eventsDone[i] = PlayerPrefs.GetInt("EventsDone_" + i);
 
         }
+
+        conceptsLearned = PlayerPrefs.GetInt("ConceptsLearned");
 
         terminarManager.AddMethod("GameManager.LoadGame()");
 
@@ -275,6 +289,26 @@ public class GameManager : MonoBehaviour {
     public bool haveSave() {
 
         return PlayerPrefs.GetInt("Current_Scene") == 0;
+
+    }
+
+    public void DeactivateTopButtons() {
+
+        topButtons.SetActive(false);
+
+    }
+
+    public void ActivateTopButtons() {
+
+        topButtons.gameObject.SetActive(true);
+
+    }
+
+    public void increaseConcepLearned(int amount) {
+
+        if(conceptsLearned < amount) {
+            conceptsLearned = amount;
+        }
 
     }
 

@@ -18,15 +18,19 @@ public class TerminarManager : MonoBehaviour {
 
     public void StopWrite() {
 
-        GameManager.instance.canMove = true;
-        GameManager.instance.menuOpen = false;
+        if (!GameManager.instance.dialogOpen) {
+            GameManager.instance.canMove = true;
+            GameManager.instance.menuOpen = false;
+        }
 
     }
 
     public void StartWhite() {
 
-        GameManager.instance.canMove = false;
-        GameManager.instance.menuOpen = true;
+        if (!GameManager.instance.dialogOpen) {
+            GameManager.instance.canMove = false;
+            GameManager.instance.menuOpen = true;
+        }
 
     }
 
