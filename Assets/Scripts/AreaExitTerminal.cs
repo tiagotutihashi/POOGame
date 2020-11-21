@@ -14,9 +14,10 @@ public class AreaExitTerminal : MonoBehaviour {
 
         switch (method) {
             case "setOpen(true)":
-                areaExit.setOpen(true);
-                GameManager.instance.eventsDone[0] = 1;
-                GameManager.instance.increaseConcepLearned(2);
+                if (GameManager.instance.verifyEvent(3)) {
+                    areaExit.setOpen(true);
+                    GameManager.instance.increaseConcepLearned(2);
+                }
                 break;
             case "setOpen(false)":
                 areaExit.setOpen(false);

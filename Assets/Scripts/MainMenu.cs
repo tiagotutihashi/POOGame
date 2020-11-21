@@ -13,6 +13,10 @@ public class MainMenu : MonoBehaviour {
     public List<int> firstSpeakers = new List<int>();
     public List<Sprite> firstImages = new List<Sprite>();
 
+    public List<string> firstLevelDilog = new List<string>();
+    public List<int> firstLevelSpeakers = new List<int>();
+    public List<Sprite> firstLevelImages = new List<Sprite>();
+
     void Start() {
 
         load = GameManager.instance.gameObject.GetComponentInChildren<LevelLoader>();
@@ -31,7 +35,8 @@ public class MainMenu : MonoBehaviour {
 
     public void NewGame() {
         DisableButtons(false);
-        load.LoadFirst(8, firstDilog, firstSpeakers, firstImages);
+        //load.LoadFirst(8, firstDilog, firstSpeakers, firstImages);
+        load.LoadFirstLevelFinalEvent(9, firstLevelDilog, firstLevelSpeakers, firstLevelImages, new Vector3(-10f, 0, 0), new Vector3(1f, 0, 0));
     }
 
     public void Continue() {

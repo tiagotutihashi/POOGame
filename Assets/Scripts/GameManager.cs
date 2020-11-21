@@ -312,4 +312,28 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    public void increaseEventCount(int amount) {
+
+        if(eventsDone.Count < amount) {
+            eventsDone.Add(1);
+        } else {
+            eventsDone[amount - 1] = 1;
+        }
+
+    }
+
+    public bool verifyEvent(int number) {
+
+        if (eventsDone.Count < number) {
+            return false;
+        } else {
+            if(eventsDone[number - 1] == 1) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
 }

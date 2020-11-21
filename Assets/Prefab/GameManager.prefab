@@ -327,6 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &116531486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,7 +1308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &568390668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1423,10 +1425,10 @@ RectTransform:
   m_Father: {fileID: 568390668}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 30.100952, y: -27.58554}
+  m_SizeDelta: {x: 60.201843, y: 55.17108}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &577295680
 CanvasRenderer:
@@ -1997,10 +1999,10 @@ RectTransform:
   m_Father: {fileID: 568390668}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100.302765, y: -27.58554}
+  m_SizeDelta: {x: 60.201843, y: 55.17108}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &904585854
 CanvasRenderer:
@@ -5670,11 +5672,10 @@ MonoBehaviour:
   terminarManager: {fileID: 40344235}
   levelLoader: {fileID: 5824897107872278825}
   dialogManager: {fileID: 4049408834798691061}
-  eventsDone: 00000000
+  eventsDone: 
   conceptsLearned: 0
   openMenuOnce: 0
-  helpButton: {fileID: 507403556117958481}
-  invButton: {fileID: 3011337372890525746}
+  topButtons: {fileID: 568390667}
 --- !u!1 &6245622998024924617
 GameObject:
   m_ObjectHideFlags: 0

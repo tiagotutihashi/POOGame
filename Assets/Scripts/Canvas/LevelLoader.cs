@@ -38,6 +38,11 @@ public class LevelLoader : MonoBehaviour {
         GameManager.instance.terminarManager.AddMethod("LevelLoader.LoadToMainMenu()");
     }
 
+    public void LoadFirstLevelFinalEvent(int nextScene, List<string> newDialog, List<int> howSpeaks, List<Sprite> images, Vector3 initialPosition, Vector3 initialVelocity) {
+        StartCoroutine(LoadLevelFinal(nextScene, newDialog, howSpeaks, images, initialPosition, initialVelocity));
+        GameManager.instance.terminarManager.AddMethod("LevelLoader.LoadFirstLevelFinalEvent()");
+    }
+
     IEnumerator LoadLevel(int levelIndex) {
 
         GameManager.instance.enemyMove = false;
@@ -184,6 +189,45 @@ public class LevelLoader : MonoBehaviour {
         yield return new WaitForSeconds(transitionTime);
 
         transition[index].gameObject.SetActive(false);
+
+    }
+
+    IEnumerator LoadLevelFinal(int levelIndex, List<string> newDialog, List<int> howSpeaks, List<Sprite> images, Vector3 initialPosition, Vector3 initialVelocity) {
+
+        GameManager.instance.enemyMove = false;
+
+        GameManager.instance.canMove = false;
+
+        transition[index].gameObject.SetActive(true);
+
+        transition[index].SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(levelIndex);
+
+        transition[index].SetTrigger("End");
+
+        player.gameObject.SetActive(true);
+
+        player.gameObject.transform.position = initialPosition;
+
+        yield return new WaitForSeconds(transitionTime);
+
+        player.x = initialVelocity.x;
+        player.y = initialVelocity.y;
+
+        yield return new WaitForSeconds(1f);
+
+        transition[index].gameObject.SetActive(false);
+
+        GameManager.instance.canMove = true;
+
+        GameManager.instance.enemyMove = true;
+
+        GameManager.instance.ActivateTopButtons();
+
+        GameManager.instance.dialogManager.StartDialog(newDialog, howSpeaks, images);
 
     }
 
