@@ -22,6 +22,8 @@ public class AreaExit : MonoBehaviour {
 
     public bool open = true;
 
+    public int eventNumber = 0;
+
     void Start() {
         entrance = GetComponentInChildren<AreaEntrace>();
         loader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
@@ -40,7 +42,8 @@ public class AreaExit : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Player" && GameManager.instance.canMove && open) {
+        if (other.tag == "Player" && GameManager.instance.canMove && open && 
+            (eventNumber == 0 || GameManager.instance.verifyEvent(eventNumber))) {
             if (isX) {
                 if (negativeX) {
                     player.x = directionX * -1;

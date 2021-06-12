@@ -313,8 +313,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void increaseEventCount(int amount) {
-
-        if(eventsDone.Count < amount) {
+        int theDiff = amount - eventsDone.Count;
+        if (theDiff > 1) {
+            for (int i = 0; i < theDiff; i++) {
+                eventsDone.Add(1);
+            }
+        }
+        if (eventsDone.Count < amount) {
             eventsDone.Add(1);
         } else {
             eventsDone[amount - 1] = 1;
